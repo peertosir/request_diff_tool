@@ -1,6 +1,5 @@
 import requests
 from deepdiff import diff
-import json
 
 
 def make_diff(url1, url2, method, headers):
@@ -8,8 +7,8 @@ def make_diff(url1, url2, method, headers):
 
     if method == 'POST':
         try:
-            response1 = requests.post(url1, headers=headers).json()
-            response2 = requests.post(url2, headers=headers).json()
+            response1 = requests.post(url1, headers=headers, verify=False).json()
+            response2 = requests.post(url2, headers=headers, verify=False).json()
         except:
             return {
                 "handler": handler_name,
@@ -17,8 +16,8 @@ def make_diff(url1, url2, method, headers):
             }
     elif method == 'GET':
         try:
-            response1 = requests.get(url1, headers=headers).json()
-            response2 = requests.get(url2, headers=headers).json()
+            response1 = requests.get(url1, headers=headers, verify=False).json()
+            response2 = requests.get(url2, headers=headers, verify=False).json()
         except:
             return {
                 "handler": handler_name,
@@ -40,8 +39,8 @@ def run_presets_checks(preset):
     return_value = []
     for handler in preset['handlers']:
         for version in handler['versions']:
-            url1 = '{}v{}{}'.format(preset['host1'], version, handler['url'], handler['queryParams'])
-            url2 = '{}v{}{}'.format(preset['host2'], version, handler['url'], handler['queryParams'])
+            url1 = '{}v{}{}{}'.format(preset['host1'], version, handler['url'], handler['queryParams'])
+            url2 = '{}v{}{}{}'.format(preset['host2'], version, handler['url'], handler['queryParams'])
             try:
                 result = make_diff(url1, url2, handler['method'], handler['headers'])
                 print(result)
