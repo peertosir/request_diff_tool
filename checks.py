@@ -4,30 +4,23 @@ from deepdiff import diff
 
 def make_diff(url1, url2, method, headers):
     handler_name = ' '.join(url1.split('/')[-2:]).upper()
-
-    if method == 'POST':
-        try:
+    try:
+        if method == 'POST':
             response1 = requests.post(url1, headers=headers, verify=False).json()
             response2 = requests.post(url2, headers=headers, verify=False).json()
-        except:
-            return {
-                "handler": handler_name,
-                "error": "Something bad happened"
-            }
-    elif method == 'GET':
-        try:
+        elif method == 'GET':
             response1 = requests.get(url1, headers=headers, verify=False).json()
             response2 = requests.get(url2, headers=headers, verify=False).json()
-        except:
+        else:
             return {
                 "handler": handler_name,
-                "error": "Something bad happened"
+                "error": "Method not supported in script yet"
             }
-    else:
+    except:
         return {
-            "handler": handler_name,
-            "error": "Method not supported in script yet"
-        }
+                "handler": handler_name,
+                "error": "Error during request occured"
+            }
     diff_result = diff.DeepDiff(response1, response2, ignore_order=True)
     return {
                 "handler": handler_name,
