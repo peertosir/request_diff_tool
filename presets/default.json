@@ -1,0 +1,16 @@
+{
+  "name": "Default",
+  "host1": "http://localhost:3030/",
+  "host2": "http://localhost:4040/",
+  "handlers": [
+    {
+      "method": "GET",
+      "url": "/user1",
+      "versions": [1, 2, 3, 4, 5],
+      "queryParams": "?page=2",
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    }
+  ]
+}
