@@ -6,11 +6,11 @@ def make_diff(url1, url2, method, headers, body=None):
     handler_name = ' '.join(url1.split('/')[-2:]).upper()
     try:
         if method == 'POST':
-            response1 = requests.post(url1, body, headers=headers, verify=False).json()
-            response2 = requests.post(url2, body, headers=headers, verify=False).json()
+            response1 = requests.post(url1, body, headers=headers, verify=False)
+            response2 = requests.post(url2, body, headers=headers, verify=False)
         elif method == 'GET':
-            response1 = requests.get(url1, headers=headers, verify=False).json()
-            response2 = requests.get(url2, headers=headers, verify=False).json()
+            response1 = requests.get(url1, headers=headers, verify=False)
+            response2 = requests.get(url2, headers=headers, verify=False)
         else:
             return {
                 "handler": handler_name,
@@ -21,9 +21,10 @@ def make_diff(url1, url2, method, headers, body=None):
             "handler": handler_name,
             "error": "Error during request occured"
         }
-    diff_result = diff.DeepDiff(response1, response2, ignore_order=True)
+    diff_result = diff.DeepDiff(response1.json(), response2.json(), ignore_order=True)
     return {
         "handler": handler_name,
+        "status_code": response1.status_code,
         "result": diff_result.to_json() if bool(diff_result.to_dict()) else "NO DIFF"
     }
 

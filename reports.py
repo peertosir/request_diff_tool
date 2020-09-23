@@ -11,12 +11,12 @@ def get_preset_header(preset):
 
 
 def get_diff_report(check):
-    return '<table><tr><td>{}</td><td><pre>{}<pre></td></tr></table>'\
-        .format(check["handler"], check['result'])
+    return '<table><tr><td>{}</td><td class="status-code">{}</td><td><pre>{}<pre></td></tr></table>'\
+        .format(check["handler"], check["status_code"], check['result'])
 
 
 def get_error_report(check):
-    return '<tr><td>{}</td><td>{}</td></tr>' \
+    return '<tr><td>{}</td><td></td><td>{}</td></tr>' \
         .format(check["handler"], check['error'])
 
 
