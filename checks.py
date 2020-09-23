@@ -1,3 +1,5 @@
+import json
+
 import requests
 from deepdiff import diff
 
@@ -6,8 +8,8 @@ def make_diff(url1, url2, method, headers, body=None):
     handler_name = ' '.join(url1.split('/')[-2:]).upper()
     try:
         if method == 'POST':
-            response1 = requests.post(url1, body, headers=headers, verify=False)
-            response2 = requests.post(url2, body, headers=headers, verify=False)
+            response1 = requests.post(url1, data=json.dumps(body), headers=headers, verify=False)
+            response2 = requests.post(url2, data=json.dumps(body), headers=headers, verify=False)
         elif method == 'GET':
             response1 = requests.get(url1, headers=headers, verify=False)
             response2 = requests.get(url2, headers=headers, verify=False)

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Report</title>
+    <style>
+        table, tr, td {
+            border: 1px solid black;
+        }
+        table {
+            width: 95%;
+        }
+        td {
+            width: 50%
+        }
+        .status-code {
+            width: 10%
+        }
+    </style>
+</head>
+<body>
+<h2>Report from 2020-09-23</h2><h2>Default</h2><table><table><tr><td>V1 USER1?PAGE=2</td><td class="status-code">200</td><td><pre>{"values_changed": {"root['username']": {"new_value": "Igor", "old_value": "Ivan"}}}<pre></td></tr></table><table><tr><td>V2 USER1?PAGE=2</td><td class="status-code">200</td><td><pre>{"values_changed": {"root['username']": {"new_value": "Ivan", "old_value": "Igor"}}}<pre></td></tr></table><table><tr><td>V3 USER1?PAGE=2</td><td class="status-code">200</td><td><pre>{"dictionary_item_removed": ["root['username']"]}<pre></td></tr></table><table><tr><td>V4 USER1?PAGE=2</td><td class="status-code">200</td><td><pre>{"dictionary_item_added": ["root['username']"]}<pre></td></tr></table><table><tr><td>V5 USER1?PAGE=2</td><td class="status-code">200</td><td><pre>NO DIFF<pre></td></tr></table></table><hr></body></html>
